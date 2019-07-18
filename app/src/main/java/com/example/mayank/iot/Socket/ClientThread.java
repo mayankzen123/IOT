@@ -1,108 +1,115 @@
 package com.example.mayank.iot.Socket;
 
 import android.os.Message;
-
-import com.example.mayank.iot.Fragment.SocketFragment;
-import com.example.mayank.iot.MainActivity;
-
+import com.example.mayank.iot.Fragment.SocketFragment.ClientHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientThread extends Thread {
-
+    BufferedReader bufferedReader;
     String dstAddress;
     int dstPort;
-    private boolean running;
-    SocketFragment.ClientHandler handler;
-
-    Socket socket;
+    ClientHandler handler;
     PrintWriter printWriter;
-    BufferedReader bufferedReader;
+    private boolean running;
+    Socket socket;
 
-    public ClientThread(String addr, int port, SocketFragment.ClientHandler handler) {
-        super();
-        dstAddress = addr;
-        dstPort = port;
-        this.handler = handler;
+    public ClientThread(String addr, int port, ClientHandler handler2) {
+        this.dstAddress = addr;
+        this.dstPort = port;
+        this.handler = handler2;
     }
 
-    public void setRunning(String closeConn, boolean running) {
-        txMsg(closeConn);
-        this.running = running;
+    public void setRunning(String closeConn, boolean running2) {
+        sendCommand(closeConn);
+        this.running = running2;
     }
 
     private void sendState(String state) {
-        handler.sendMessage(
-                Message.obtain(handler,
-                        SocketFragment.ClientHandler.UPDATE_STATE, state));
+        this.handler.sendMessage(Message.obtain(this.handler, 0, state));
     }
 
-    public void txMsg(String msgToSend) {
-        if (printWriter != null) {
-            printWriter.println(msgToSend);
+    public void sendCommand(String msgToSend) {
+        if (this.printWriter != null) {
+            this.printWriter.println(msgToSend);
         }
     }
 
-    @Override
     public void run() {
-        sendState("connecting...");
-
-        running = true;
-
+        sendState("connecting");
+        this.running = true;
         try {
-            socket = new Socket(dstAddress, dstPort);
+            this.socket = new Socket(this.dstAddress, this.dstPort);
             sendState("connected");
-
-            OutputStream outputStream = socket.getOutputStream();
-            printWriter = new PrintWriter(outputStream, true);
-
-            InputStream inputStream = socket.getInputStream();
-            InputStreamReader inputStreamReader =
-                    new InputStreamReader(inputStream);
-            bufferedReader = new BufferedReader(inputStreamReader);
-
-
-            while (running) {
-                String line;
-                if (bufferedReader.ready()) {
-                    line = bufferedReader.readLine();
+            this.printWriter = new PrintWriter(this.socket.getOutputStream(), true);
+            this.bufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            while (this.running) {
+                if (this.bufferedReader.ready()) {
+                    String line = this.bufferedReader.readLine();
                     if (line != null) {
-                        handler.sendMessage(
-                                Message.obtain(handler,
-                                        SocketFragment.ClientHandler.UPDATE_MSG, line));
+                        this.handler.sendMessage(Message.obtain(this.handler, 1, line));
                     }
                 }
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (bufferedReader != null) {
+            if (this.bufferedReader != null) {
                 try {
-                    bufferedReader.close();
+                    this.bufferedReader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
-            if (printWriter != null) {
-                printWriter.close();
+            if (this.printWriter != null) {
+                this.printWriter.close();
             }
-
-            if (socket != null) {
+            if (this.socket != null) {
                 try {
-                    socket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    this.socket.close();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
                 }
             }
+        } catch (IOException e3) {
+            e3.printStackTrace();
+            if (this.bufferedReader != null) {
+                try {
+                    this.bufferedReader.close();
+                } catch (IOException e4) {
+                    e4.printStackTrace();
+                }
+            }
+            if (this.printWriter != null) {
+                this.printWriter.close();
+            }
+            if (this.socket != null) {
+                try {
+                    this.socket.close();
+                } catch (IOException e5) {
+                    e5.printStackTrace();
+                }
+            }
+        } catch (Throwable th) {
+            if (this.bufferedReader != null) {
+                try {
+                    this.bufferedReader.close();
+                } catch (IOException e6) {
+                    e6.printStackTrace();
+                }
+            }
+            if (this.printWriter != null) {
+                this.printWriter.close();
+            }
+            if (this.socket != null) {
+                try {
+                    this.socket.close();
+                } catch (IOException e7) {
+                    e7.printStackTrace();
+                }
+            }
+            throw th;
         }
-
-        handler.sendEmptyMessage(SocketFragment.ClientHandler.UPDATE_END);
+        this.handler.sendEmptyMessage(2);
     }
 }

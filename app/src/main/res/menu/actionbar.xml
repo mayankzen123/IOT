@@ -1,24 +1,10 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/action_download"
-        android:icon="@drawable/save"
-        android:orderInCategory="100"
-        android:title="Download"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/action_email"
-        android:icon="@drawable/email"
-        android:orderInCategory="100"
-        android:title="Email"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/action_details"
-        android:icon="@drawable/details"
-        android:orderInCategory="100"
-        android:title="Server Details"
-        app:showAsAction="always" />
-
-
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/save" android:id="@+id/action_download" android:orderInCategory="100" android:title="Download" app:showAsAction="always"/>
+    <item android:icon="@drawable/email" android:id="@+id/action_email" android:orderInCategory="100" android:title="Email" app:showAsAction="always"/>
+    <item android:icon="@drawable/details" android:id="@+id/action_details" android:orderInCategory="100" android:title="Server Details" app:showAsAction="always"/>
+    <item android:icon="@drawable/connect" android:id="@+id/action_connect" android:visible="false" android:orderInCategory="100" android:title="Connect" app:showAsAction="always"/>
+    <item android:icon="@drawable/disconnect" android:id="@+id/action_disconnect" android:visible="false" android:orderInCategory="100" android:title="Disconnect" app:showAsAction="always"/>
+    <item android:icon="@drawable/soundon" android:id="@+id/action_sound_on" android:visible="false" android:orderInCategory="100" android:title="Connect" app:showAsAction="always"/>
+    <item android:icon="@drawable/soundoff" android:id="@+id/action_sound_off" android:visible="false" android:orderInCategory="100" android:title="Disconnect" app:showAsAction="always"/>
 </menu>
