@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_download"
+        android:icon="@drawable/save"
+        android:orderInCategory="100"
+        android:title="Download"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_email"
+        android:icon="@drawable/email"
+        android:orderInCategory="100"
+        android:title="Email"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_details"
+        android:icon="@drawable/details"
+        android:orderInCategory="100"
+        android:title="Server Details"
+        app:showAsAction="always" />
+
+
+</menu>
