@@ -36,12 +36,12 @@ public class ConnectionDialogFragment extends DialogFragment implements View.OnC
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setCancelable(false);
-        serverIp = (EditText) view.findViewById(R.id.host_name);
-        serverPort = (EditText) view.findViewById(R.id.input_port);
-        save = (Button) view.findViewById(R.id.btn_save);
-        cancel = (Button) view.findViewById(R.id.btn_cancel);
-        inputServerIp = (TextInputLayout) view.findViewById(R.id.input_layout_host);
-        inputServerPort = (TextInputLayout) view.findViewById(R.id.input_layout_port);
+        serverIp = view.findViewById(R.id.host_name);
+        serverPort = view.findViewById(R.id.input_port);
+        save = view.findViewById(R.id.btn_save);
+        cancel = view.findViewById(R.id.btn_cancel);
+        inputServerIp = view.findViewById(R.id.input_layout_host);
+        inputServerPort = view.findViewById(R.id.input_layout_port);
         setServerDetails();
         save.setOnClickListener(this);
         cancel.setOnClickListener(this);

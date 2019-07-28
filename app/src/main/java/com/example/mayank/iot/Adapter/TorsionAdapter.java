@@ -41,15 +41,15 @@ public class TorsionAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.frag_tosion_header, null);
             holder = new ViewHolder();
-            holder.txtEntryId = (TextView) convertView.findViewById(R.id.serail_no);
-            holder.txtDate = (TextView) convertView.findViewById(R.id.date);
-            holder.txtSampleName = (TextView) convertView.findViewById(R.id.sample_name);
-            holder.txtCountOne = (TextView) convertView.findViewById(R.id.count_one);
-            holder.txtCountTwo = (TextView) convertView.findViewById(R.id.count_two);
-            holder.txtCountThree = (TextView) convertView.findViewById(R.id.count_three);
-            holder.txtAverage = (TextView) convertView.findViewById(R.id.average);
-            holder.txtClientResult = (TextView) convertView.findViewById(R.id.client_result);
-            holder.txtOverallResult = (TextView) convertView.findViewById(R.id.result_status);
+            holder.txtEntryId = convertView.findViewById(R.id.serail_no);
+            holder.txtDate = convertView.findViewById(R.id.date);
+            holder.txtSampleName = convertView.findViewById(R.id.sample_name);
+            holder.txtCountOne = convertView.findViewById(R.id.count_one);
+            holder.txtCountTwo = convertView.findViewById(R.id.count_two);
+            holder.txtCountThree = convertView.findViewById(R.id.count_three);
+            holder.txtAverage = convertView.findViewById(R.id.average);
+            holder.txtClientResult = convertView.findViewById(R.id.client_result);
+            holder.txtOverallResult = convertView.findViewById(R.id.result_status);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

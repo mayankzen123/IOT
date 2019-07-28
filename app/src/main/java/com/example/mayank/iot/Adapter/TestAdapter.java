@@ -42,15 +42,15 @@ public class TestAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.frag_dht11_header, null);
             holder = new ViewHolder();
-            holder.txtTestId = (TextView) convertView.findViewById(R.id.serail_no);
-            holder.txtCount = (TextView) convertView.findViewById(R.id.date);
+            holder.txtTestId = convertView.findViewById(R.id.serail_no);
+            holder.txtCount = convertView.findViewById(R.id.date);
             convertView.findViewById(R.id.temperature).setVisibility(8);
             convertView.findViewById(R.id.humidity).setVisibility(8);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        TestCasesModel testCase = (TestCasesModel) this.testCasesModelList.get(position);
+        TestCasesModel testCase = this.testCasesModelList.get(position);
         if (position % 2 == 0) {
             holder.txtTestId.setTextColor(Color.parseColor("#ffffffff"));
             holder.txtCount.setTextColor(Color.parseColor("#ffffffff"));

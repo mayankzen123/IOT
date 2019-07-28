@@ -51,13 +51,13 @@ public class SocketFragment extends Fragment implements OnClickListener {
 
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case 0:
+                case UPDATE_STATE:
                     this.parent.updateState((String) msg.obj);
                     return;
-                case 1:
+                case UPDATE_MSG:
                     this.parent.updateRxMsg((String) msg.obj);
                     return;
-                case 2:
+                case UPDATE_END:
                     this.parent.clientEnd();
                     return;
                 default:
@@ -72,13 +72,13 @@ public class SocketFragment extends Fragment implements OnClickListener {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.textViewState = (TextView) view.findViewById(R.id.state);
-        this.textViewRx = (TextView) view.findViewById(R.id.received);
-        this.btnStartMotor = (Button) view.findViewById(R.id.btn_start_motor);
-        this.btnNextEntry = (Button) view.findViewById(R.id.btn_next_entry);
-        this.btnPushData = (Button) view.findViewById(R.id.btn_push_Data);
-        this.testCasesList = (ListView) view.findViewById(R.id.test_list_view);
-        this.noData = (TextView) view.findViewById(R.id.blank);
+        this.textViewState = view.findViewById(R.id.state);
+        this.textViewRx = view.findViewById(R.id.received);
+        this.btnStartMotor = view.findViewById(R.id.btn_start_motor);
+        this.btnNextEntry = view.findViewById(R.id.btn_next_entry);
+        this.btnPushData = view.findViewById(R.id.btn_push_Data);
+        this.testCasesList = view.findViewById(R.id.test_list_view);
+        this.noData = view.findViewById(R.id.blank);
         this.testAdapter = new TestAdapter(getActivity(), this.testCasesModelList);
         this.testCasesList.setAdapter(this.testAdapter);
         setStateOfButton(false);
@@ -207,7 +207,7 @@ public class SocketFragment extends Fragment implements OnClickListener {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_start_motor /*2131493014*/:
+            case R.id.btn_start_motor:
                 if (this.btnStartMotor.getText().toString().equalsIgnoreCase("START MOTOR")) {
                     this.clientThread.sendCommand("STARTMOTOR");
                     return;
@@ -215,10 +215,10 @@ public class SocketFragment extends Fragment implements OnClickListener {
                     this.clientThread.sendCommand("STOPMOTOR");
                     return;
                 }
-            case R.id.btn_next_entry /*2131493015*/:
+            case R.id.btn_next_entry:
                 this.clientThread.sendCommand("NEXTENTRY");
                 return;
-            case R.id.btn_push_Data /*2131493016*/:
+            case R.id.btn_push_Data :
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 Bundle bundle = new Bundle();
                 bundle.putString("DialogType", "PushData");

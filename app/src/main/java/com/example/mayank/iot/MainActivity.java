@@ -15,11 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.mayank.iot.Adapter.PagerAdapter;
 import com.example.mayank.iot.Fragment.ConnectionDialogFragment;
 import com.example.mayank.iot.Fragment.Dht11;
 import com.example.mayank.iot.Fragment.SocketFragment;
 import com.example.mayank.iot.Fragment.TorsionFragment;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
     public static Menu menu;
@@ -38,8 +40,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     /* access modifiers changed from: protected */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView((int) R.layout.activity_main);
-        this.viewPager = (ViewPager) findViewById(R.id.pager);
+        Fabric.with(this, new Crashlytics());
+        setContentView(R.layout.activity_main);
+        this.viewPager = findViewById(R.id.pager);
         this.viewPager.setOffscreenPageLimit(2);
         this.actionBar = getSupportActionBar();
         this.actionBar.setDisplayShowHomeEnabled(false);
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         this.actionBar.setHomeButtonEnabled(false);
         this.actionBar.setNavigationMode(2);
         for (String tab_name : this.tabs) {
-            this.actionBar.addTab(this.actionBar.newTab().setText((CharSequence) tab_name).setTabListener(this));
+            this.actionBar.addTab(this.actionBar.newTab().setText(tab_name).setTabListener(this));
         }
         this.viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageSelected(int position) {

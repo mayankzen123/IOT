@@ -33,7 +33,7 @@ public class Util {
     final static String TAG = MainActivity.class.getSimpleName();
     public static final String MY_PREFS_NAME = "IotPrefFile";
 
-    public static boolean saveTorsionExcelFile(Context context, String fileName, List<TorsionModel.FeedsEntity> feedsEntityList, String headerName[], String workSheetName) {
+    public static boolean saveTorsionExcelFile(Context context, String fileName, List<TorsionModel.FeedsEntity> feedsEntityList, String[] headerName, String workSheetName) {
         // check if available and not read only
         if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
             Log.e(TAG, "Storage not available or read only");
@@ -189,21 +189,15 @@ public class Util {
 
     public static boolean isExternalStorageReadOnly() {
         String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState);
     }
 
     public static boolean isExternalStorageAvailable() {
         String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(extStorageState);
     }
 
-    public static boolean saveDht11ExcelFile(Context context, String fileName, List<DHT11Model.FeedsEntity> feedsEntityList, String headerName[], String workSheetName) {
+    public static boolean saveDht11ExcelFile(Context context, String fileName, List<DHT11Model.FeedsEntity> feedsEntityList, String[] headerName, String workSheetName) {
         if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
             Log.e(TAG, "Storage not available or read only");
             return false;
@@ -311,14 +305,14 @@ public class Util {
     }
 
     public static void saveDataToSharedPref(Context context, String ip, String port) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(MY_PREFS_NAME, context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE).edit();
         editor.putString("serverIp", ip);
         editor.putString("serverPort", port);
         editor.commit();
     }
 
     public static SharedPreferences getSharePref(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, context.MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         return prefs;
     }
 

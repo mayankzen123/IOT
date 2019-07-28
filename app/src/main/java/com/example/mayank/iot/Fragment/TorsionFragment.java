@@ -43,7 +43,7 @@ public class TorsionFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private SwipeRefreshLayout swipeRefreshLayout;
     static List<TorsionModel.FeedsEntity> feedsEntityList;
 
-    static String headerName[] = {"Entry Id", "Date", "Sample Name", "Count 1", "Count 2", "Count 3", "Average", "Client Result", "Actual Result"};
+    static String[] headerName = {"Entry Id", "Date", "Sample Name", "Count 1", "Count 2", "Count 3", "Average", "Client Result", "Actual Result"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,8 +53,8 @@ public class TorsionFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        torsionListView = (ListView) view.findViewById(R.id.torsion_list_view);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.torsion_swipe_refresh_layout);
+        torsionListView = view.findViewById(R.id.torsion_list_view);
+        swipeRefreshLayout = view.findViewById(R.id.torsion_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         if (API_KEY.isEmpty()) {
@@ -155,7 +155,7 @@ public class TorsionFragment extends Fragment implements SwipeRefreshLayout.OnRe
                 Uri path = Uri.fromFile(file);
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
                 emailIntent.setType("vnd.android.cursor.dir/email");
-                String to[] = {""};
+                String[] to = {""};
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
                 emailIntent.putExtra(Intent.EXTRA_STREAM, path);
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Torsion Result");

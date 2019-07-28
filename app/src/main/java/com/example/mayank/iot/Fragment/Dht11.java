@@ -42,7 +42,7 @@ public class Dht11 extends Fragment implements SwipeRefreshLayout.OnRefreshListe
     ListView torsionListView;
     private SwipeRefreshLayout swipeRefreshLayout;
     static List<DHT11Model.FeedsEntity> feedsEntityList;
-    static String headerName[] = {"Entry Id", "Date", "Temperature", "Humidity"};
+    static String[] headerName = {"Entry Id", "Date", "Temperature", "Humidity"};
 
 
     @Override
@@ -53,8 +53,8 @@ public class Dht11 extends Fragment implements SwipeRefreshLayout.OnRefreshListe
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        torsionListView = (ListView) view.findViewById(R.id.dht11_list_view);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.dht11_swipe_refresh_layout);
+        torsionListView = view.findViewById(R.id.dht11_list_view);
+        swipeRefreshLayout = view.findViewById(R.id.dht11_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
         if (API_KEY.isEmpty()) {
@@ -152,7 +152,7 @@ public class Dht11 extends Fragment implements SwipeRefreshLayout.OnRefreshListe
                 Uri path = Uri.fromFile(file);
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
                 emailIntent.setType("vnd.android.cursor.dir/email");
-                String to[] = {""};
+                String[] to = {""};
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
                 emailIntent.putExtra(Intent.EXTRA_STREAM, path);
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DHT11 Result");

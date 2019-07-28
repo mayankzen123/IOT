@@ -40,10 +40,10 @@ public class Dht11Adapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.frag_dht11_header, null);
             holder = new ViewHolder();
-            holder.txtEntryId = (TextView) convertView.findViewById(R.id.serail_no);
-            holder.txtDate = (TextView) convertView.findViewById(R.id.date);
-            holder.txtTemperature = (TextView) convertView.findViewById(R.id.temperature);
-            holder.txtHumidity = (TextView) convertView.findViewById(R.id.humidity);
+            holder.txtEntryId = convertView.findViewById(R.id.serail_no);
+            holder.txtDate = convertView.findViewById(R.id.date);
+            holder.txtTemperature = convertView.findViewById(R.id.temperature);
+            holder.txtHumidity = convertView.findViewById(R.id.humidity);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
